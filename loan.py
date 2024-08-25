@@ -1,8 +1,8 @@
 import mysql.connector
 mydb = mysql.connector.connect(
-    host= 'localhost',
-    user ='root',
-    password= '##kc@##hc@98'
+    host= '',
+    user ='',
+    password= ''
 )
 mycursor=mydb.cursor()
 #mycursor.execute('create database loan_approval')

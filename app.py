@@ -12,10 +12,10 @@ def create_connection():
     connection = None
     try:
         connection = mysql.connector.connect(
-            host="localhost",
-            user="root",   # Replace with your MySQL username
-            password="##kc@##hc@98",  # Replace with your MySQL password
-            database="loan_approval"  # The database you created
+            host="",
+            user="",   # Replace with your MySQL username
+            password="",  # Replace with your MySQL password
+            database=""  # The database you created
         )
         print("Connection to MySQL DB successful")
     except Error as e:
