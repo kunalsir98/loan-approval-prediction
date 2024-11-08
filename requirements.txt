@@ -3,4 +3,5 @@ pandas
 numpy 
 seaborn 
 flask
--e .
+gunicorn==22.0.0
+#-e .
