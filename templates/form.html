@@ -1,6 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loan Prediction Dashboard</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/apexcharts@3.37.3/dist/apexcharts.css">
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+  <style>
+    body {
+      font-family: "Inter", sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f9;
+      color: #333;
+    }
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 20px;
+    }
+    .chart-container {
+      margin-bottom: 40px;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .chart-title {
+      margin-bottom: 20px;
+      font-size: 1.5rem;
+      color: #1A56DB;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="chart-container">
+      <div class="chart-title">Loan Approval Rates</div>
+      <div id="approval-rates-chart"></div>
+    </div>
+
+    <div class="chart-container">
+      <div class="chart-title">Predicted vs Actual Loan Amount</div>
+      <div id="loan-amount-chart"></div>
+    </div>
+
+    <div class="chart-container">
+      <div class="chart-title">Approval Rates by Income Group</div>
+      <div id="income-group-chart"></div>
+    </div>
+  </div>
+
+  <script>
+    // Loan Approval Rates Chart
+    window.addEventListener("load", function () {
+      const approvalRatesOptions = {
+        series: [70, 30],
+        labels: ['Approved', 'Rejected'],
+        colors: ['#1A56DB', '#FDBA8C'],
+        chart: {
+          type: 'pie',
+          height: 320,
+        },
+        legend: {
+          position: 'bottom',
+        },
+      };
+      const approvalRatesChart = new ApexCharts(document.querySelector("#approval-rates-chart"), approvalRatesOptions);
+      approvalRatesChart.render();
+    });
+
+    // Predicted vs Actual Loan Amount Chart
+    window.addEventListener("load", function () {
+      const loanAmountOptions = {
+        series: [
+          { name: 'Predicted', data: [12000, 15000, 18000, 21000, 25000], color: "#1A56DB" },
+          { name: 'Actual', data: [11000, 15500, 17500, 20000, 26000], color: "#7E3BF2" },
+        ],
+        chart: {
+          type: 'area',
+          height: 320,
+        },
+        xaxis: {
+          categories: ['Applicant 1', 'Applicant 2', 'Applicant 3', 'Applicant 4', 'Applicant 5'],
+        },
+        yaxis: {
+          labels: { formatter: (value) => '₹' + value },
+        },
+      };
+      const loanAmountChart = new ApexCharts(document.querySelector("#loan-amount-chart"), loanAmountOptions);
+      loanAmountChart.render();
+    });
+
+    // Approval Rates by Income Group Chart
+    window.addEventListener("load", function () {
+      const incomeGroupOptions = {
+        series: [{
+          name: "Approval Rate",
+          data: [
+            { x: "Low Income", y: 40 },
+            { x: "Middle Income", y: 60 },
+            { x: "High Income", y: 80 },
+          ],
+        }],
+        chart: {
+          type: "bar",
+          height: 320,
+        },
+        plotOptions: {
+          bar: {
+            columnWidth: "70%",
+            borderRadius: 8,
+          },
+        },
+        colors: ['#1A56DB'],
+      };
+      const incomeGroupChart = new ApexCharts(document.querySelector("#income-group-chart"), incomeGroupOptions);
+      incomeGroupChart.render();
+    });
+  </script>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Loan Approval Prediction Form</title>

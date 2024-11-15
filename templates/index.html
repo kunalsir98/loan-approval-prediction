@@ -4,78 +4,124 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>loan approval predictor</title>
+    <title>Loan Approval Application</title>
     <style>
-        /* Reset and base styles */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        /* Base and reset styles */
+        * {
             margin: 0;
             padding: 0;
-            background: #121212;
-            color: #ffffff;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
             overflow-x: hidden;
         }
 
-        /* Navbar styles */
+        /* Navbar */
         .navbar {
-            background-color: #1f1f1f;
-            padding: 15px 30px;
-            color: #ffffff;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            position: relative;
+            background-color: #ffffff;
+            padding: 20px 40px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+        }
+
+        .navbar .logo {
+            color: #4a90e2;
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 1px;
         }
 
         .navbar a {
-            color: #ffffff;
-            text-decoration: none;
+            color: #333;
             margin: 0 15px;
             font-size: 16px;
             font-weight: bold;
+            text-decoration: none;
             transition: color 0.3s;
         }
 
         .navbar a:hover {
-            color: #00bcd4;
+            color: #4a90e2;
         }
 
-        .navbar .logo {
-            font-size: 24px;
-            font-weight: bold;
-            color: #00bcd4;
-        }
-
-        /* Container styles */
-        .container {
+        /* Hero section */
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             text-align: center;
-            background-color: #1f1f1f;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
-            width: 90%;
-            max-width: 600px;
-            margin: 20px auto;
-            position: relative;
+            background-image: url('https://img.freepik.com/free-vector/bank-loan-concept-illustration_114360-16751.jpg?ga=GA1.1.915130604.1731674604&semt=ais_hybrid'); /* Loan background */
+            background-size: cover;
+            background-position: center;
+            padding: 120px 20px;
+            height: 100vh;
+            box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.4); /* Dark overlay for text readability */
         }
 
-        /* Section styles */
+        .hero h1 {
+            font-size: 48px;
+            color: #ffffff;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: #ffffff;
+            max-width: 700px;
+            margin: 10px auto;
+            line-height: 1.6;
+        }
+
+        .hero .btn {
+            margin-top: 20px;
+            background-color: #4a90e2;
+            color: #ffffff;
+            padding: 15px 40px;
+            font-size: 18px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .hero .btn:hover {
+            background-color: #357ab7;
+            transform: translateY(-3px);
+        }
+
+        /* Sections */
         section {
             padding: 60px 20px;
+            margin: 20px 0;
+            max-width: 800px;
+            width: 90%;
+            margin-left: auto;
+            margin-right: auto;
             text-align: center;
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            background-color: #ffffff;
             opacity: 0;
             transform: translateY(20px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-            margin: 20px auto;
-            background-color: #1f1f1f;
-            border-radius: 15px;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
-            width: 90%;
-            max-width: 800px;
+            transition: opacity 0.8s ease, transform 0.8s ease;
         }
 
         section.visible {
@@ -83,114 +129,80 @@
             transform: translateY(0);
         }
 
-        h2 {
+        section h2 {
+            font-size: 32px;
+            color: #4a90e2;
             margin-bottom: 20px;
-            color: #00bcd4;
-            font-size: 28px;
-            font-weight: 600;
         }
 
-        p {
-            margin-bottom: 20px;
-            color: #bbbbbb;
+        section p,
+        section li {
             font-size: 18px;
+            color: #555;
             line-height: 1.6;
         }
 
-        ul {
-            list-style-type: none;
+        section ul {
+            list-style: none;
             padding: 0;
         }
 
-        ul li {
-            margin-bottom: 10px;
-            font-size: 18px;
-            color: #bbbbbb;
+        section li {
+            margin: 10px 0;
         }
 
-        blockquote {
-            font-style: italic;
-            color: #dddddd;
-            margin: 20px auto;
+        /* Footer */
+        .footer {
+            background-color: #f4f4f9;
             padding: 20px;
-            background: #333333;
-            border-left: 5px solid #00bcd4;
-            border-radius: 10px;
-            max-width: 700px;
+            text-align: center;
+            color: #999;
+            font-size: 14px;
         }
 
-        /* Button styles */
-        .btn {
-            background-color: #00bcd4;
-            color: #ffffff;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 18px;
-            transition: background-color 0.3s, transform 0.2s;
-            text-decoration: none;
-            display: inline-block;
-            text-transform: uppercase;
-            font-weight: bold;
-            letter-spacing: 0.5px;
+        /* Social Media Icons */
+        .social-links {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
         }
 
-        .btn:hover {
-            background-color: #0097a7;
-            transform: translateY(-2px);
+        .social-links a {
+            margin: 0 15px;
+            font-size: 24px;
+            color: #333;
+            transition: color 0.3s;
         }
 
-        .btn:active {
-            background-color: #00796b;
-            transform: translateY(0);
+        .social-links a:hover {
+            color: #4a90e2;
         }
 
-        /* Additional styling for responsiveness */
+        /* Responsive */
         @media (max-width: 600px) {
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
             .navbar {
                 flex-direction: column;
-                align-items: flex-start;
             }
 
             .navbar a {
-                margin: 5px 0;
-            }
-
-            .container {
-                padding: 20px;
-                width: 95%;
-            }
-
-            h1 {
-                font-size: 24px;
-            }
-
-            h2 {
-                font-size: 22px;
-            }
-
-            p {
-                font-size: 16px;
-            }
-
-            .btn {
-                padding: 12px 24px;
-                font-size: 16px;
-            }
-
-            section {
-                padding: 40px 20px;
+                margin: 10px 0;
             }
         }
     </style>
 </head>
 
 <body>
-
     <!-- Navbar -->
     <nav class="navbar">
-        <div class="logo">loan approval predictor</div>
+        <div class="logo">Loan Tracker</div>
         <div>
             <a href="#about">About</a>
             <a href="#features">Features</a>
@@ -199,51 +211,65 @@
         </div>
     </nav>
 
-    <!-- Main content -->
-    <div class="container">
-        <h1>loan approval predictor</h1>
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Loan Approval Application</h1>
+        <p>Get instant loan approval predictions with our easy-to-use application.</p>
         <a href="{{ url_for('predict_datapoint') }}" class="btn">Get Started</a>
-    </div>
+    </section>
 
     <!-- About Section -->
-    <section id="about" class="about">
-        <h2>About Us</h2>
-        <p>Welcome to the loan approval prediction. Our mission is to provide a reliable and easy-to-use tool to help individuals and organizations detect fraudulent transactions. Using advanced machine learning algorithms, we aim to make fraud detection accessible and effective.</p>
+    <section id="about">
+        <h2>About Our Tool</h2>
+        <p>Our loan approval prediction tool allows you to quickly assess your eligibility for a loan based on various financial factors.</p>
     </section>
 
     <!-- Features Section -->
-    <section id="features" class="features">
+    <section id="features">
         <h2>Features</h2>
-        <p>Our detector offers a range of features designed to provide accurate and useful results:</p>
         <ul>
-            <li>High accuracy predictions</li>
+            <li>Instant loan approval prediction</li>
             <li>User-friendly interface</li>
-            <li>Detailed reports</li>
-            <li>24/7 customer support</li>
+            <li>Track loan status and eligibility</li>
+            <li>Secure and private data handling</li>
         </ul>
     </section>
 
     <!-- Testimonials Section -->
-    <section id="testimonials" class="testimonials">
+    <section id="testimonials">
         <h2>Testimonials</h2>
-        <p>Here's what our users are saying:</p>
-        <blockquote>"This tool is fantastic! It helped us catch fraudulent transactions and save money." - Jane Doe</blockquote>
-        <blockquote>"Highly recommend this detector. The interface is easy to use and the results are very accurate." - John Smith</blockquote>
+        <blockquote>"This tool made loan application so easy and fast!" - Sarah</blockquote>
+        <blockquote>"I love how simple and effective this app is!" - John</blockquote>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="contact">
+    <section id="contact">
         <h2>Contact Us</h2>
-        <p>If you have any questions or need support, feel free to reach out to us:</p>
-        <p>Email: support@frauddetector.com</p>
+        <p>If you have any questions, feel free to reach out:</p>
+        <p>Email: support@loantracker.com</p>
         <p>Phone: (123) 456-7890</p>
     </section>
 
+    <!-- Social Media Links -->
+    <div class="social-links">
+        <a href="https://github.com/kunalsir98" target="_blank">
+            <img src="https://img.icons8.com/ios-filled/50/000000/github.png" alt="GitHub">
+        </a>
+        <a href="https://www.linkedin.com/in/kunal-chopde-812720267/" target="_blank">
+            <img src="https://img.icons8.com/ios-filled/50/000000/linkedin.png" alt="LinkedIn">
+        </a>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>&copy; 2024 Loan Tracker. All rights reserved.</p>
+    </div>
+
     <script>
-        document.addEventListener('scroll', function() {
+        // Smooth scroll effect
+        document.addEventListener('scroll', function () {
             const sections = document.querySelectorAll('section');
             const scrollPosition = window.scrollY + window.innerHeight;
-
             sections.forEach(section => {
                 if (scrollPosition > section.offsetTop + section.offsetHeight / 4) {
                     section.classList.add('visible');
@@ -251,7 +277,6 @@
             });
         });
     </script>
-
 </body>
 
 </html>
